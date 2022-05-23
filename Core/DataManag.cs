@@ -5,15 +5,31 @@ using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using PsihiService.ViewModels;
+using Core.ViewModels;
 
-namespace PsihiService
+namespace Core
 {
     public static class DataManag
     {
         private static string connect = ConfigurationManager.ConnectionStrings["Psihi"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connect);
 
+        public static List<User> GetUsers()
+        {
+            return connection.Query<User>("select * from [dbo].[User]").AsList();
+        }
+        public static User GetUser(int id)
+        {
+            try
+            {
+                return connection.Query<User>($"select * from [dbo].[User]" +
+                    $"where [id_user] = {id}").AsList()[0];
+            }
+            catch
+            {
+                { return null; }
+            }
+        }
         public static List<Problems> GetProblems()
         {
             return connection.Query<Problems>("select id_problems, name from Problems where [isDeleted] = 'false'").AsList();
@@ -32,7 +48,7 @@ namespace PsihiService
         }
         public static void AddProblem(Problems problems)
         {
-            connection.Query($"insert into [dbo].[Problems] ([name]) values ('{problems.name}')");
+            connection.Query($"insert into [dbo].[Problems] ([name]) values ('{problems.name}'), ([isDeleted]) values ('false')");
         }
         public static void RemoveProblem(int id)
         {
@@ -77,7 +93,7 @@ namespace PsihiService
         {
             connection.Query($"insert into [dbo].[Client] ([fio], [passport]," +
                 $" [phone], [id_type], [id_employee]) values" +
-                $"('{model.client.fio}, {model.client.passport}, {model.client.phone}, {model.client.id_type}, {model.client.id_employee}')");
+                $"('{model.client.fio}, {model.client.passport}, {model.client.phone}, {model.client.id_type}')");
         }
         public static void RemoveClient(int id)
         {

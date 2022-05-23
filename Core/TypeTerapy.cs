@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PsihiService
+namespace Core
 {
-    public class Problems
+    public class TypeTerapy
     {
-        public int id_problems { get; set; }
+        public int id_type { get; set; }
         public string name { get; set; }
-
+        public int price { get; set; }
     }
 }
