@@ -30,6 +30,10 @@ namespace Core
                 { return null; }
             }
         }
+        public static void AddUser(User user)
+        {
+            connection.Query($"insert into [dbo].[User] ([login], [password]) values ('{user.login}', '{user.password}')");
+        }
         public static List<Problems> GetProblems()
         {
             return connection.Query<Problems>("select id_problems, name from Problems where [isDeleted] = 'false'").AsList();
@@ -48,7 +52,7 @@ namespace Core
         }
         public static void AddProblem(Problems problems)
         {
-            connection.Query($"insert into [dbo].[Problems] ([name]) values ('{problems.name}'), ([isDeleted]) values ('false')");
+            connection.Query($"insert into [dbo].[Problems] ([name], [isDeleted]) values ('{problems.name}, 'false'')");
         }
         public static void RemoveProblem(int id)
         {
@@ -89,11 +93,11 @@ namespace Core
                                               " on ep.id_type = t.id_type" +
                                               $" where ep.id_employee = {id_employee}").AsList();
         }
-        public static void AddClient(ClientModel model)
+        public static void AddClient(Client client)
         {
             connection.Query($"insert into [dbo].[Client] ([fio], [passport]," +
-                $" [phone], [id_type], [id_employee]) values" +
-                $"('{model.client.fio}, {model.client.passport}, {model.client.phone}, {model.client.id_type}')");
+                $" [phone], [id_type], [id_user]) values" +
+                $"('{client.fio}', '{client.passport}', '{client.phone}', '{client.id_type}', '{client.id_user}')");
         }
         public static void RemoveClient(int id)
         {

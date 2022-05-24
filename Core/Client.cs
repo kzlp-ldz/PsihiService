@@ -14,10 +14,9 @@ namespace Core
         public string phone { get; set; }
         public int id_type { get; set; }
         public int id_user { get; set; }
-        public void AddClient(Client client, List<TypeTerapy> types)
+        public void AddClient(Client client)
         {
-            var model = new ClientModel() { client = client, type = types };
-            DataManag.AddClient(model);
+            DataManag.AddClient(client);
         }
         public void RemoveClient(Client client)
         {

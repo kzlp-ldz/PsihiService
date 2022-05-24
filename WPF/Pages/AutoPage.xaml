@@ -31,8 +31,8 @@
         <TextBox x:Name="login"  TextAlignment="Left"  Grid.Column="1" Grid.Row="3" Background="#F9EAEA"  FontSize="30" Padding="5" FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
         <TextBox x:Name="password"   TextAlignment="Left"  Grid.Column="1" Grid.Row="5" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
         <StackPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
-        <Button x:Name="connect" Content="Войти" Width="190" Grid.Column="1" Grid.Row="7" Background="#F9EAEA"  FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnConnect"/>
-            <Button x:Name="btn_reg" Content="Регистрация" Width="190"  Grid.Column="1" Grid.Row="7" Background="#F9EAEA" FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnRegist"/>
+        <Button x:Name="connect" Content="Войти" Margin="3" Width="190" Grid.Column="1" Grid.Row="7" Background="#F9EAEA"  FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnConnect"/>
+            <Button x:Name="btn_reg" Content="Регистрация" Margin="3" Width="190"  Grid.Column="1" Grid.Row="7" Background="#F9EAEA" FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnRegist"/>
         </StackPanel>
     </Grid>
 </Page>

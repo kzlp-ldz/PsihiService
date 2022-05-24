@@ -6,9 +6,48 @@
       xmlns:local="clr-namespace:WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegistPage">
+      Title="RegistPage"
+      xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Регистрация" FontSize="36" FontStyle="Normal" FontWeight="Regular" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="ФИО "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="Паспорт "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="Телефон "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="Тип терапии "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="Логин "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBlock Text="Пароль "  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#706262"/>
+        <TextBox x:Name="tbx_fio" Margin="3" TextAlignment="Left"  Grid.Column="1" Grid.Row="2" Background="#F9EAEA"  FontSize="30" Padding="5" FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <TextBox x:Name="tbx_passport" PreviewTextInput="OnPreviewTextInput" MaxLength="10"  Margin="3"  TextAlignment="Left"  Grid.Column="1" Grid.Row="3" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <TextBox x:Name="tbx_login" Margin="3" TextAlignment="Left"  Grid.Column="1" Grid.Row="6" Background="#F9EAEA"  FontSize="30" Padding="5" FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <TextBox x:Name="tbx_password" Margin="3"  TextAlignment="Left"  Grid.Column="1" Grid.Row="7" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <TextBox x:Name="tbx_phone" Margin="3" PreviewTextInput="OnPreviewTextInput" MaxLength="11" TextAlignment="Left"  Grid.Column="1" Grid.Row="4" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="cmbx_types" Grid.Row="5" Grid.Column="1" Margin="2" FontSize="15" FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Background="#F9EAEA" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="btn_reg" Margin="3" Content="Регистрация" Grid.Column="1" Grid.Row="9" Background="#F9EAEA" FontSize="28" VerticalContentAlignment="Center" FontStyle="Normal" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnRegist"/>
         
     </Grid>
 </Page>

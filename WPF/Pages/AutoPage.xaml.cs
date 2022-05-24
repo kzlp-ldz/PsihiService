@@ -34,17 +34,22 @@ namespace WPF
         }
         private void btnConnect(object sender, RoutedEventArgs e)
         {
-            var users = DataManag.GetUsers().Where(a => a.login == login.Text && a.password == password.Text).FirstOrDefault();
-            user = DataManag.GetUser(users.id_user);
-            if (login.Text == user.login && password.Text == user.password)
+            if (login.Text != "" && password.Text != "")
             {
-                if (user.id_user == client.id_user)
-                    NavigationService.Navigate(new EmployeeListPage());
+                var user = DataManag.GetUsers().Where(a => a.login == login.Text && a.password == password.Text).FirstOrDefault();
+
+                if (user != null)
+                {
+                    if (user.id_user == client.id_user)
+                        NavigationService.Navigate(new EmployeeListPage());
+                    else
+                        NavigationService.Navigate(new ClientsListPage());
+                }
                 else
-                    NavigationService.Navigate(new ClientsListPage());
+                    MessageBox.Show("Неверный пароль или логин");
             }
             else
-                MessageBox.Show("Неверный пароль или логин");
+                MessageBox.Show("Введите логин и пароль!!!!!");
         }
         private void btnRegist(object sender, RoutedEventArgs e)
         {
