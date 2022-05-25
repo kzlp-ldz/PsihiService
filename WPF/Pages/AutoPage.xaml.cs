@@ -37,12 +37,14 @@ namespace WPF
             if (login.Text != "" && password.Text != "")
             {
                 var user = DataManag.GetUsers().Where(a => a.login == login.Text && a.password == password.Text).FirstOrDefault();
-
+                
                 if (user != null)
                 {
-                    if (user.id_user == client.id_user)
-                        NavigationService.Navigate(new EmployeeListPage());
-                    else
+                    var client = DataManag.GetClients().Where(a => a.id_user == user.id_user).FirstOrDefault();
+                    var employee = DataManag.GetEmployees().Where(a => a.id_user == user.id_user).FirstOrDefault();
+                    if (client != null)
+                        NavigationService.Navigate(new EmployeeListPage(client));
+                    else if(employee != null)
                         NavigationService.Navigate(new ClientsListPage());
                 }
                 else

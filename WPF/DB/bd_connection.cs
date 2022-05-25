@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core
+namespace WPF.DB
 {
-    public class ClientModel
+    public class bd_connection
     {
-        public Client client { get; set; }
-
+        public static PsihiEntities connection = new PsihiEntities();
     }
 }

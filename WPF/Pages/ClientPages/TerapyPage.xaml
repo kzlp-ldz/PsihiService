@@ -1,0 +1,40 @@
+﻿<Page x:Class="WPF.Pages.ClientPages.TerapyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Pages.ClientPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TerapyPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="psihology_lb" Content="Психологи" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="psihologlb_Click"/>
+        <Label x:Name="terapy_lb" Content="Записи" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#E489A6" />
+        <Label x:Name="goout_lb" Content="Выйти" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="gooutlb_Click"/>
+        <DataGrid x:Name="employee_dg" AutoGenerateColumns="False"  Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="5" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#706262" Background="#F9EAEA">
+            <DataGrid.Columns >
+                <DataGridTextColumn  Header="ФИО" Width="300" Binding="{Binding Employee.fio}"/>
+                <DataGridTextColumn Header="Тип терапии" Width="300" Binding="{Binding TypeTerapy.name}" />
+                <DataGridTextColumn Header="Дата встречи" Width="300" Binding="{Binding dateTerapy, StringFormat ='dd.MM.yyyy hh:mm tt'}" />
+                <DataGridTextColumn Header="Цена" Width="300" Binding="{Binding TypeTerapy.price}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

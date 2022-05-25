@@ -96,8 +96,8 @@ namespace Core
         public static void AddClient(Client client)
         {
             connection.Query($"insert into [dbo].[Client] ([fio], [passport]," +
-                $" [phone], [id_type], [id_user]) values" +
-                $"('{client.fio}', '{client.passport}', '{client.phone}', '{client.id_type}', '{client.id_user}')");
+                $" [phone], [id_user]) values" +
+                $"('{client.fio}', '{client.passport}', '{client.phone}', '{client.id_user}')");
         }
         public static void RemoveClient(int id)
         {

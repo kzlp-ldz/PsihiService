@@ -35,9 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -83,6 +92,49 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DB\bd_connection.cs" />
+    <Compile Include="DB\Client.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Client_Employee.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Employee.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Empl_Prob.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Emp_Type.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Position.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Problems.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Psihi.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Psihi.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Psihi.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Psihi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Psihi.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DB\TypeTerapy.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\User.cs">
+      <DependentUpon>Psihi.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AutoPage.xaml.cs">
       <DependentUpon>AutoPage.xaml</DependentUpon>
     </Compile>
@@ -91,6 +143,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\ClientPages\EmployeeListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ClientPages\TerapyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,6 +162,9 @@
   <ItemGroup>
     <Compile Include="Pages\ClientPages\EmployeeListPage.xaml.cs">
       <DependentUpon>EmployeeListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ClientPages\TerapyPage.xaml.cs">
+      <DependentUpon>TerapyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EmployeePages\ClientsListPage.xaml.cs">
       <DependentUpon>ClientsListPage.xaml</DependentUpon>
@@ -130,6 +189,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DB\Psihi.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Psihi.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DB\Psihi.edmx.diagram">
+      <DependentUpon>Psihi.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -144,6 +210,21 @@
       <Project>{281717f2-758d-4432-a59b-5d7f0bff8e8e}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\Psihi.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Psihi.edmx</DependentUpon>
+      <LastGenOutput>Psihi.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DB\Psihi.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Psihi.edmx</DependentUpon>
+      <LastGenOutput>Psihi.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

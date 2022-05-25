@@ -12,30 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Core;
 using WPF.DB;
-using System.Collections.ObjectModel;
 
 namespace WPF.Pages.ClientPages
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeeListPage.xaml
+    /// Логика взаимодействия для TerapyPage.xaml
     /// </summary>
-    public partial class EmployeeListPage : Page
+    public partial class TerapyPage : Page
     {
         Core.Client user = new Core.Client();
-        public EmployeeListPage(Core.Client client)
+        public TerapyPage(Core.Client client)
         {
             InitializeComponent();
-            employee_dg.ItemsSource = bd_connection.connection.Employee.ToList().Where(a => a.id_position == 1);
 
             user = client;
-            this.DataContext = this;
+            employee_dg.ItemsSource = bd_connection.connection.Client_Employee.ToList().Where(a => a.id_client == user.id_client);
         }
-
-        private void terapylb_Click(object sender, MouseButtonEventArgs e)
+        private void psihologlb_Click(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new TerapyPage(user));
+            NavigationService.Navigate(new EmployeeListPage(user));
         }
 
         private void gooutlb_Click(object sender, MouseButtonEventArgs e)

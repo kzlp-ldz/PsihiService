@@ -28,8 +28,6 @@ namespace WPF.Pages
         public RegistPage()
         {
             InitializeComponent();
-            typeTerapy = DataManag.GetTypes();
-            cmbx_types.ItemsSource = typeTerapy;
             this.DataContext = this;
         }
 
@@ -48,7 +46,6 @@ namespace WPF.Pages
                 var users = DataManag.GetUsers().Where(a => a.login == tbx_login.Text && a.password == tbx_password.Text).FirstOrDefault();
 
                 client.fio = tbx_fio.Text;
-                client.id_type = (cmbx_types.SelectedItem as TypeTerapy).id_type;
                 client.passport = tbx_passport.Text;
                 client.phone = tbx_phone.Text;
                 client.id_user = users.id_user;

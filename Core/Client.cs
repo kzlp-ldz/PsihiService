@@ -12,7 +12,6 @@ namespace Core
         public string fio { get; set; }
         public string passport { get; set; }
         public string phone { get; set; }
-        public int id_type { get; set; }
         public int id_user { get; set; }
         public void AddClient(Client client)
         {

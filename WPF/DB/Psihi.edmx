@@ -1,0 +1,646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище PsihiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fio" Type="nvarchar" MaxLength="100" />
+          <Property Name="passport" Type="nvarchar" MaxLength="11" />
+          <Property Name="phone" Type="nvarchar" MaxLength="12" />
+          <Property Name="id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Client_Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateTerapy" Type="datetime" />
+          <Property Name="id_type" Type="int" />
+        </EntityType>
+        <EntityType Name="Emp_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="id_type" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empl_Prob">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="id_problems" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fio" Type="nvarchar" MaxLength="100" />
+          <Property Name="passport" Type="nvarchar" MaxLength="11" />
+          <Property Name="phone" Type="nvarchar" MaxLength="12" />
+          <Property Name="id_position" Type="int" />
+          <Property Name="id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Problems">
+          <Key>
+            <PropertyRef Name="id_problems" />
+          </Key>
+          <Property Name="id_problems" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TypeTerapy">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Client_Employee_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client_Employee" Type="Self.Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Client_Employee" Type="Self.Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Employee_TypeTerapy">
+          <End Role="TypeTerapy" Type="Self.TypeTerapy" Multiplicity="0..1" />
+          <End Role="Client_Employee" Type="Self.Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTerapy">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Type_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Emp_Type" Type="Self.Emp_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Emp_Type">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Type_TypeTerapy">
+          <End Role="TypeTerapy" Type="Self.TypeTerapy" Multiplicity="1" />
+          <End Role="Emp_Type" Type="Self.Emp_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTerapy">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Emp_Type">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empl_Prob_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Empl_Prob" Type="Self.Empl_Prob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Empl_Prob">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empl_Prob_Problems">
+          <End Role="Problems" Type="Self.Problems" Multiplicity="1" />
+          <End Role="Empl_Prob" Type="Self.Empl_Prob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Problems">
+              <PropertyRef Name="id_problems" />
+            </Principal>
+            <Dependent Role="Empl_Prob">
+              <PropertyRef Name="id_problems" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PsihiModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client_Employee" EntityType="Self.Client_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emp_Type" EntityType="Self.Emp_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empl_Prob" EntityType="Self.Empl_Prob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Problems" EntityType="Self.Problems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeTerapy" EntityType="Self.TypeTerapy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_Employee_Client" Association="Self.FK_Client_Employee_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Employee_Employee" Association="Self.FK_Client_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Employee_TypeTerapy" Association="Self.FK_Client_Employee_TypeTerapy">
+            <End Role="TypeTerapy" EntitySet="TypeTerapy" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Type_Employee" Association="Self.FK_Emp_Type_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Emp_Type" EntitySet="Emp_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Type_TypeTerapy" Association="Self.FK_Emp_Type_TypeTerapy">
+            <End Role="TypeTerapy" EntitySet="TypeTerapy" />
+            <End Role="Emp_Type" EntitySet="Emp_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empl_Prob_Employee" Association="Self.FK_Empl_Prob_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Empl_Prob" EntitySet="Empl_Prob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empl_Prob_Problems" Association="Self.FK_Empl_Prob_Problems">
+            <End Role="Problems" EntitySet="Problems" />
+            <End Role="Empl_Prob" EntitySet="Empl_Prob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Position" Association="Self.FK_Employee_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PsihiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="passport" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="id_user" Type="Int32" />
+          <NavigationProperty Name="Client_Employee" Relationship="Self.FK_Client_Employee_Client" FromRole="Client" ToRole="Client_Employee" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Client_User" FromRole="Client" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Client_Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Employee_Client" FromRole="Client_Employee" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Client_Employee_Employee" FromRole="Client_Employee" ToRole="Employee" />
+          <Property Name="dateTerapy" Type="DateTime" Precision="3" />
+          <Property Name="id_type" Type="Int32" />
+          <NavigationProperty Name="TypeTerapy" Relationship="PsihiModel.FK_Client_Employee_TypeTerapy" FromRole="Client_Employee" ToRole="TypeTerapy" />
+        </EntityType>
+        <EntityType Name="Emp_Type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="id_type" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Emp_Type_Employee" FromRole="Emp_Type" ToRole="Employee" />
+          <NavigationProperty Name="TypeTerapy" Relationship="Self.FK_Emp_Type_TypeTerapy" FromRole="Emp_Type" ToRole="TypeTerapy" />
+        </EntityType>
+        <EntityType Name="Empl_Prob">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="id_problems" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Empl_Prob_Employee" FromRole="Empl_Prob" ToRole="Employee" />
+          <NavigationProperty Name="Problems" Relationship="Self.FK_Empl_Prob_Problems" FromRole="Empl_Prob" ToRole="Problems" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id_employee" />
+          </Key>
+          <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="passport" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="id_position" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <NavigationProperty Name="Client_Employee" Relationship="Self.FK_Client_Employee_Employee" FromRole="Employee" ToRole="Client_Employee" />
+          <NavigationProperty Name="Emp_Type" Relationship="Self.FK_Emp_Type_Employee" FromRole="Employee" ToRole="Emp_Type" />
+          <NavigationProperty Name="Empl_Prob" Relationship="Self.FK_Empl_Prob_Employee" FromRole="Employee" ToRole="Empl_Prob" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Employee_Position" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Position" FromRole="Position" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Problems">
+          <Key>
+            <PropertyRef Name="id_problems" />
+          </Key>
+          <Property Name="id_problems" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <NavigationProperty Name="Empl_Prob" Relationship="Self.FK_Empl_Prob_Problems" FromRole="Problems" ToRole="Empl_Prob" />
+        </EntityType>
+        <EntityType Name="TypeTerapy">
+          <Key>
+            <PropertyRef Name="id_type" />
+          </Key>
+          <Property Name="id_type" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="Emp_Type" Relationship="Self.FK_Emp_Type_TypeTerapy" FromRole="TypeTerapy" ToRole="Emp_Type" />
+          <NavigationProperty Name="Client_Employee" Relationship="PsihiModel.FK_Client_Employee_TypeTerapy" FromRole="TypeTerapy" ToRole="Client_Employee" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_User" FromRole="User" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Client_Employee_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client_Employee" Type="Self.Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Client_Employee" Type="Self.Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Type_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Emp_Type" Type="Self.Emp_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Emp_Type">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Type_TypeTerapy">
+          <End Role="TypeTerapy" Type="Self.TypeTerapy" Multiplicity="1" />
+          <End Role="Emp_Type" Type="Self.Emp_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTerapy">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Emp_Type">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empl_Prob_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Empl_Prob" Type="Self.Empl_Prob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="Empl_Prob">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empl_Prob_Problems">
+          <End Role="Problems" Type="Self.Problems" Multiplicity="1" />
+          <End Role="Empl_Prob" Type="Self.Empl_Prob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Problems">
+              <PropertyRef Name="id_problems" />
+            </Principal>
+            <Dependent Role="Empl_Prob">
+              <PropertyRef Name="id_problems" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PsihiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Client_Employee" EntityType="Self.Client_Employee" />
+          <EntitySet Name="Emp_Type" EntityType="Self.Emp_Type" />
+          <EntitySet Name="Empl_Prob" EntityType="Self.Empl_Prob" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Problems" EntityType="Self.Problems" />
+          <EntitySet Name="TypeTerapy" EntityType="Self.TypeTerapy" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Client_Employee_Client" Association="Self.FK_Client_Employee_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_User" Association="Self.FK_Client_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Employee_Employee" Association="Self.FK_Client_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Type_Employee" Association="Self.FK_Emp_Type_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Emp_Type" EntitySet="Emp_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Type_TypeTerapy" Association="Self.FK_Emp_Type_TypeTerapy">
+            <End Role="TypeTerapy" EntitySet="TypeTerapy" />
+            <End Role="Emp_Type" EntitySet="Emp_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empl_Prob_Employee" Association="Self.FK_Empl_Prob_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Empl_Prob" EntitySet="Empl_Prob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empl_Prob_Problems" Association="Self.FK_Empl_Prob_Problems">
+            <End Role="Problems" EntitySet="Problems" />
+            <End Role="Empl_Prob" EntitySet="Empl_Prob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Position" Association="Self.FK_Employee_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Employee_TypeTerapy" Association="PsihiModel.FK_Client_Employee_TypeTerapy">
+            <End Role="TypeTerapy" EntitySet="TypeTerapy" />
+            <End Role="Client_Employee" EntitySet="Client_Employee" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Client_Employee_TypeTerapy">
+          <End Type="PsihiModel.TypeTerapy" Role="TypeTerapy" Multiplicity="0..1" />
+          <End Type="PsihiModel.Client_Employee" Role="Client_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTerapy">
+              <PropertyRef Name="id_type" />
+            </Principal>
+            <Dependent Role="Client_Employee">
+              <PropertyRef Name="id_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PsihiModelContainer" CdmEntityContainer="PsihiEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="PsihiModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client_Employee">
+            <EntityTypeMapping TypeName="PsihiModel.Client_Employee">
+              <MappingFragment StoreEntitySet="Client_Employee">
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="dateTerapy" ColumnName="dateTerapy" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Type">
+            <EntityTypeMapping TypeName="PsihiModel.Emp_Type">
+              <MappingFragment StoreEntitySet="Emp_Type">
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empl_Prob">
+            <EntityTypeMapping TypeName="PsihiModel.Empl_Prob">
+              <MappingFragment StoreEntitySet="Empl_Prob">
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_problems" ColumnName="id_problems" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="PsihiModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="PsihiModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Problems">
+            <EntityTypeMapping TypeName="PsihiModel.Problems">
+              <MappingFragment StoreEntitySet="Problems">
+                <ScalarProperty Name="id_problems" ColumnName="id_problems" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeTerapy">
+            <EntityTypeMapping TypeName="PsihiModel.TypeTerapy">
+              <MappingFragment StoreEntitySet="TypeTerapy">
+                <ScalarProperty Name="id_type" ColumnName="id_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PsihiModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

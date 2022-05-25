@@ -9,6 +9,69 @@
       Title="EmployeeListPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="psihology_lb" Content="Психологи" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#E489A6" />
+        <Label x:Name="terapy_lb" Content="Записи" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="terapylb_Click"/>
+        <Label x:Name="goout_lb" Content="Выйти" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="gooutlb_Click"/>
+        <DataGrid x:Name="employee_dg" AutoGenerateColumns="False"  Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="5" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#706262" Background="#F9EAEA">
+            <DataGrid.Columns >
+                <DataGridTextColumn  Header="ФИО" Width="300" Binding="{Binding fio}"/>
+                <DataGridTemplateColumn Header="Тип терапии" Width="300" x:Name="lv_types" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Emp_Type}" Foreground="#706262" Background="#F9EAEA">
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
+                                        <Label x:Name="lb_emptypes" Foreground="#706262" Background="#F9EAEA" Height="40" Content="{Binding TypeTerapy.name}"/>
+                                </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Работает с" Width="300" x:Name="lv_problems" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Empl_Prob}" Foreground="#706262" Background="#F9EAEA">
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
+                                        <Label x:Name="lb_empprob" Foreground="#706262" Background="#F9EAEA" Height="40" Content="{Binding Problems.name}"/>
+                                </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Цена" Width="300" x:Name="lv_price" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Emp_Type}" Foreground="#706262" Background="#F9EAEA">
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
+                                        <Label x:Name="lb_empprice" Foreground="#706262" Background="#F9EAEA" Height="40" Content="{Binding TypeTerapy.price}"/>
+                                </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            
+        </DataGrid>
     </Grid>
 </Page>
