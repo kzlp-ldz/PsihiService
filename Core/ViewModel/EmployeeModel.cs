@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PsihiService.ViewModels
+namespace Core.ViewModels
 {
     public class EmployeeModel
     {

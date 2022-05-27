@@ -5,15 +5,35 @@ using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using PsihiService.ViewModels;
+using Core.ViewModels;
 
-namespace PsihiService
+namespace Core
 {
     public static class DataManag
     {
         private static string connect = ConfigurationManager.ConnectionStrings["Psihi"].ConnectionString;
         private static IDbConnection connection = new SqlConnection(connect);
 
+        public static List<User> GetUsers()
+        {
+            return connection.Query<User>("select * from [dbo].[User]").AsList();
+        }
+        public static User GetUser(int id)
+        {
+            try
+            {
+                return connection.Query<User>($"select * from [dbo].[User]" +
+                    $"where [id_user] = {id}").AsList()[0];
+            }
+            catch
+            {
+                { return null; }
+            }
+        }
+        public static void AddUser(User user)
+        {
+            connection.Query($"insert into [dbo].[User] ([login], [password]) values ('{user.login}', '{user.password}')");
+        }
         public static List<Problems> GetProblems()
         {
             return connection.Query<Problems>("select id_problems, name from Problems where [isDeleted] = 'false'").AsList();
@@ -32,7 +52,7 @@ namespace PsihiService
         }
         public static void AddProblem(Problems problems)
         {
-            connection.Query($"insert into [dbo].[Problems] ([name]) values ('{problems.name}')");
+            connection.Query($"insert into [dbo].[Problems] ([name], [isDeleted]) values ('{problems.name}, 'false'')");
         }
         public static void RemoveProblem(int id)
         {
@@ -73,11 +93,11 @@ namespace PsihiService
                                               " on ep.id_type = t.id_type" +
                                               $" where ep.id_employee = {id_employee}").AsList();
         }
-        public static void AddClient(ClientModel model)
+        public static void AddClient(Client client)
         {
             connection.Query($"insert into [dbo].[Client] ([fio], [passport]," +
-                $" [phone], [id_type], [id_employee]) values" +
-                $"('{model.client.fio}, {model.client.passport}, {model.client.phone}, {model.client.id_type}, {model.client.id_employee}')");
+                $" [phone], [id_user]) values" +
+                $"('{client.fio}', '{client.passport}', '{client.phone}', '{client.id_user}')");
         }
         public static void RemoveClient(int id)
         {
@@ -118,6 +138,10 @@ namespace PsihiService
         public static void UpdateClient(int id, Client client)
         {
             connection.Query($"update [dbo].[Client] set [fio] = '{client.fio}' where [id_client] = {id}");
+        }
+        public static List<Client_Employee> GetTerapiyes()
+        {
+            return connection.Query<Client_Employee>("select * from [dbo].[Client_Employee]").AsList();
         }
     }
 }

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PsihiService
+namespace WPF.DB
 {
-    public class Problems
+    public class bd_connection
     {
-        public int id_problems { get; set; }
-        public string name { get; set; }
-
+        public static PsihiEntities connection = new PsihiEntities();
     }
 }

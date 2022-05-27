@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PsihiService
+namespace Core
 {
     public class Client
     {
@@ -12,13 +12,10 @@ namespace PsihiService
         public string fio { get; set; }
         public string passport { get; set; }
         public string phone { get; set; }
-        public int id_type { get; set; }
-        public int id_employee { get; set; }
         public int id_user { get; set; }
-        public void AddClient(Client client, List<TypeTerapy> types)
+        public void AddClient(Client client)
         {
-            var model = new ClientModel() { client = client, type = types };
-            DataManag.AddClient(model);
+            DataManag.AddClient(client);
         }
         public void RemoveClient(Client client)
         {
