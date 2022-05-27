@@ -45,7 +45,7 @@ namespace WPF
                     if (client != null)
                         NavigationService.Navigate(new EmployeeListPage(client));
                     else if(employee != null)
-                        NavigationService.Navigate(new ClientsListPage());
+                        NavigationService.Navigate(new ClientsListPage(employee));
                 }
                 else
                     MessageBox.Show("Неверный пароль или логин");

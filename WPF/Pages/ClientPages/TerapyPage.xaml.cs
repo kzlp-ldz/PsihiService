@@ -27,7 +27,7 @@ namespace WPF.Pages.ClientPages
             InitializeComponent();
 
             user = client;
-            employee_dg.ItemsSource = bd_connection.connection.Client_Employee.ToList().Where(a => a.id_client == user.id_client);
+            employee_dg.ItemsSource = bd_connection.connection.Client_Employee.ToList().Where(a => a.id_client == user.id_client && a.dateTerapy >= DateTime.Now);
         }
         private void psihologlb_Click(object sender, MouseButtonEventArgs e)
         {

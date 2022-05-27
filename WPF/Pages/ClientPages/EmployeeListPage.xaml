@@ -28,6 +28,7 @@
         <Label x:Name="psihology_lb" Content="Психологи" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#E489A6" />
         <Label x:Name="terapy_lb" Content="Записи" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="terapylb_Click"/>
         <Label x:Name="goout_lb" Content="Выйти" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="gooutlb_Click"/>
+        <Label x:Name="addTerapy_lb" Content="Записаться" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262"  MouseLeftButtonDown="addTerapylb_Click"/>
         <DataGrid x:Name="employee_dg" AutoGenerateColumns="False"  Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="5" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#706262" Background="#F9EAEA">
             <DataGrid.Columns >
                 <DataGridTextColumn  Header="ФИО" Width="300" Binding="{Binding fio}"/>

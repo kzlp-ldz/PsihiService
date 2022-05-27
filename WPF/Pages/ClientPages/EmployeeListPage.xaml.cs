@@ -49,5 +49,13 @@ namespace WPF.Pages.ClientPages
                 System.Windows.Application.Current.Shutdown();
             }
         }
+
+        private void addTerapylb_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (employee_dg.SelectedItem != null)
+                NavigationService.Navigate(new AddTerapyPage(employee_dg.SelectedItem as DB.Employee, user));
+            else
+                MessageBox.Show("Выберите психолога к которому хотите записаться на прием");
+        }
     }
 }

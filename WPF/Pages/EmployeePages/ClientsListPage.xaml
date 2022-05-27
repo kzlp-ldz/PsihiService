@@ -9,6 +9,32 @@
       Title="ClientsListPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="terapy_lb" Content="Записи" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#E489A6" />
+        <Label x:Name="goout_lb" Content="Выйти" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#706262" MouseLeftButtonDown="gooutlb_Click"/>
+        <DataGrid x:Name="client_dg" AutoGenerateColumns="False"  Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="5" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#706262" Background="#F9EAEA">
+            <DataGrid.Columns >
+                <DataGridTextColumn  Header="ФИО" Width="300" Binding="{Binding Client.fio}"/>
+                <DataGridTextColumn Header="Номер телефона" Width="300" Binding="{Binding Client.phone}"/>
+                <DataGridTextColumn Header="Тип терапии" Width="300" Binding="{Binding TypeTerapy.name}" />
+                <DataGridTextColumn Header="Дата встречи" Width="300" Binding="{Binding dateTerapy, StringFormat ='dd.MM.yyyy hh:mm tt'}" />
+                <DataGridTextColumn Header="Цена" Width="300" Binding="{Binding TypeTerapy.price}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

@@ -58,6 +58,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="DataManag.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Client_Employee.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Problems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -139,5 +139,9 @@ namespace Core
         {
             connection.Query($"update [dbo].[Client] set [fio] = '{client.fio}' where [id_client] = {id}");
         }
+        public static List<Client_Employee> GetTerapiyes()
+        {
+            return connection.Query<Client_Employee>("select * from [dbo].[Client_Employee]").AsList();
+        }
     }
 }
