@@ -141,7 +141,7 @@ namespace Core
         }
         public static List<Client_Employee> GetTerapiyes()
         {
-            return connection.Query<Client_Employee>("select * from [dbo].[Client_Employee]").AsList();
+            return connection.Query<Client_Employee>("select * from Client_Employee").AsList();
         }
     }
 }
