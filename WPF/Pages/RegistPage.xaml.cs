@@ -39,21 +39,27 @@ namespace WPF.Pages
             
             user.login = tbx_login.Text;
             user.password = tbx_password.Text;
-            if (IsLoginCorrect())
+            if (tbx_fio.Text != "" && tbx_passport.Text != "" && tbx_phone.Text != "" && tbx_login.Text != "" && tbx_password.Text != "")
             {
-                DataManag.AddUser(user);
+                if (IsLoginCorrect())
+                {
+                
+                    DataManag.AddUser(user);
 
-                var users = DataManag.GetUsers().Where(a => a.login == tbx_login.Text && a.password == tbx_password.Text).FirstOrDefault();
+                    var users = DataManag.GetUsers().Where(a => a.login == tbx_login.Text && a.password == tbx_password.Text).FirstOrDefault();
 
-                client.fio = tbx_fio.Text;
-                client.passport = tbx_passport.Text;
-                client.phone = tbx_phone.Text;
-                client.id_user = users.id_user;
-                DataManag.AddClient(client);
+                    client.fio = tbx_fio.Text;
+                    client.passport = tbx_passport.Text;
+                    client.phone = tbx_phone.Text;
+                    client.id_user = users.id_user;
+                    DataManag.AddClient(client);
 
-                MessageBox.Show("ДОБАВЛЕНО!!!");
-                NavigationService.Navigate(new AutoPage());
+                    MessageBox.Show("ДОБАВЛЕНО!!!");
+                    NavigationService.Navigate(new AutoPage());
+                } 
             }
+            else
+                MessageBox.Show("Заполните все поля данными!");
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)

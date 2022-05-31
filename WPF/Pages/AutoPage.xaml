@@ -7,6 +7,67 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AutoPage">
+    <Page.Resources>
+        <Style x:Key="PasswordStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="20" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <ControlTemplate x:Key="PasswordBoxTemplate1" TargetType="{x:Type PasswordBox}">
+            <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -29,7 +90,7 @@
         <TextBlock Text="Логин"  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#706262"/>
         <TextBlock Text="Пароль"  FontSize="30" FontStyle="Normal" FontWeight="Regular" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#706262"/>
         <TextBox x:Name="login"  TextAlignment="Left"  Grid.Column="1" Grid.Row="3" Background="#F9EAEA"  FontSize="30" Padding="5" FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
-        <TextBox x:Name="password"   TextAlignment="Left"  Grid.Column="1" Grid.Row="5" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Style="{DynamicResource login}" />
+        <PasswordBox Template="{DynamicResource PasswordBoxTemplate1}" x:Name="password"   Grid.Column="1" Grid.Row="5" Background="#F9EAEA"  FontSize="30"  Padding="5"  FontStyle="Normal" FontWeight="Regular" Foreground="#706262" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Margin="1,0,266,0" />
         <StackPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
         <Button x:Name="connect" Content="Войти" Margin="3" Width="190" Grid.Column="1" Grid.Row="7" Background="#F9EAEA"  FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnConnect"/>
             <Button x:Name="btn_reg" Content="Регистрация" Margin="3" Width="190"  Grid.Column="1" Grid.Row="7" Background="#F9EAEA" FontSize="30" Padding="1" FontStyle="Normal" FontWeight="Regular" Foreground="#E489A6" Style="{DynamicResource forButton}" Click="btnRegist"/>

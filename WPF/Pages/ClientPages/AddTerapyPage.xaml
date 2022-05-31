@@ -44,29 +44,29 @@
         <DatePicker x:Name="data_dp" FontSize="28" FontStyle="Normal" FontWeight="Regular" Grid.Column="2" Margin="5" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#F9EAEA" Foreground="#706262" Style="{DynamicResource dtpStyle}"/>
         <ComboBox x:Name="time_lb"  FontSize="28" FontStyle="Normal" FontWeight="Regular" Grid.Column="4" Margin="10" Grid.Row="3" Foreground="#706262" Background="#F9EAEA" Style="{DynamicResource ComboBoxStyle}" SelectionChanged="time_lb_SelectionChanged"  >
             
-            <TextBlock>10:00:00</TextBlock>
+            <TextBlock>10:00</TextBlock>
            
             
-                <TextBlock>11:00:00</TextBlock>
+                <TextBlock>11:00</TextBlock>
             
             
-                <TextBlock>12:00:00</TextBlock>
+                <TextBlock>12:00</TextBlock>
            
             
-                <TextBlock>13:00:00</TextBlock>
+                <TextBlock>13:00</TextBlock>
             
             
-                <TextBlock>14:00:00</TextBlock>
+                <TextBlock>14:00</TextBlock>
             
-                <TextBlock>15:00:00</TextBlock>
-            
-            
-                <TextBlock>16:00:00</TextBlock>
+                <TextBlock>15:00</TextBlock>
             
             
-                <TextBlock>17:00:00</TextBlock>
+                <TextBlock>16:00</TextBlock>
             
-                <TextBlock>18:00:00</TextBlock>
+            
+                <TextBlock>17:00</TextBlock>
+            
+                <TextBlock>18:00</TextBlock>
             
 
         </ComboBox>

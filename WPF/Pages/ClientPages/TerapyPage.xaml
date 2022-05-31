@@ -32,7 +32,7 @@
             <DataGrid.Columns >
                 <DataGridTextColumn  Header="ФИО" Width="300" Binding="{Binding Employee.fio}"/>
                 <DataGridTextColumn Header="Тип терапии" Width="300" Binding="{Binding TypeTerapy.name}" />
-                <DataGridTextColumn Header="Дата встречи" Width="300" Binding="{Binding dateTerapy, StringFormat ='dd.MM.yyyy hh:mm tt'}" />
+                <DataGridTextColumn Header="Дата встречи" Width="300" Binding="{Binding dateTerapy, StringFormat ='dd.MM.yyyy HH:mm'}" />
                 <DataGridTextColumn Header="Цена" Width="300" Binding="{Binding TypeTerapy.price}" />
             </DataGrid.Columns>
         </DataGrid>

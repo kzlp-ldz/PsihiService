@@ -70,7 +70,7 @@ namespace WPF.Pages.ClientPages
             if (data != null)
             {
                 var dataString = data.Value.ToShortDateString();
-                time = (time_lb.SelectedItem as TextBlock).Text;
+                time = (time_lb.SelectedItem as TextBlock).Text + ":00";
                 
                 var datatime = dataString + " " + time;
                 if (IsDataCorrect(datatime))

@@ -34,9 +34,9 @@ namespace WPF
         }
         private void btnConnect(object sender, RoutedEventArgs e)
         {
-            if (login.Text != "" && password.Text != "")
+            if (login.Text != "" && password.Password != "")
             {
-                var user = DataManag.GetUsers().Where(a => a.login == login.Text && a.password == password.Text).FirstOrDefault();
+                var user = DataManag.GetUsers().Where(a => a.login == login.Text && a.password == password.Password).FirstOrDefault();
                 
                 if (user != null)
                 {
