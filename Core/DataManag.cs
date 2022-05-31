@@ -52,7 +52,7 @@ namespace Core
         }
         public static void AddProblem(Problems problems)
         {
-            connection.Query($"insert into [dbo].[Problems] ([name], [isDeleted]) values ('{problems.name}, 'false'')");
+            connection.Query($"insert into [dbo].[Problems] ([name], [isDeleted]) values ('{problems.name}', 'False')");
         }
         public static void RemoveProblem(int id)
         {
